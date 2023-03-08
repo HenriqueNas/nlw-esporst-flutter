@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.network('assets/logo.png'),
+              Image.asset('assets/logo.png'),
               const Text(
                 'Encontre seu duo!',
                 style: TextStyle(
