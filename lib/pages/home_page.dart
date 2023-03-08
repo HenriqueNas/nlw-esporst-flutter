@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.network('assets/logo.png'),
+              Image.asset('assets/logo.png'),
               const Text(
                 'Encontre seu duo!',
                 style: TextStyle(
@@ -43,10 +43,20 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              GameCard(
-                image: image,
-                ads: 4,
-                title: 'League of Legends',
+              SizedBox(
+                height: 320,
+                child: ListView.separated(
+                  itemCount: 5,
+                  separatorBuilder: (_, __) => const SizedBox(width: 16),
+                  itemBuilder: (_, __) => GameCard(
+                    image: image,
+                    ads: 4,
+                    title: 'League of Legends',
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  clipBehavior: Clip.none,
+                ),
               ),
             ],
           ),

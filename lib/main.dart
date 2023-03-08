@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nlw/pages/game_page.dart';
 
 import 'pages/home_page.dart';
 
@@ -15,8 +16,13 @@ class NlwApp extends StatelessWidget {
       title: 'NLW eSports',
       theme: ThemeData(
         primaryColor: Colors.blue,
+        textTheme: Typography.whiteRedwoodCity,
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/game': (context) => const GamePage(),
+      },
     );
   }
 }
