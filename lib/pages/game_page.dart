@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:nlw/models/ad_model.dart';
+import 'package:nlw/models/game_model.dart';
 
 import '../widgets/ad_card.dart';
+import '../widgets/heading.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({super.key});
 
-  final image =
-      'https://cdn1.epicgames.com/offer/24b9b5e323bc40eea252a10cdd3b2f10/LoL_1200x1600-15ad6c981af8d98f50e833eac7843986';
-
   @override
   Widget build(BuildContext context) {
+    final game = ModalRoute.of(context)?.settings.arguments as GameModel;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -49,28 +51,16 @@ class GamePage extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    image,
+                    game.image,
                     height: 160,
                     fit: BoxFit.fitWidth,
                   ),
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'League of Legends',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    height: 38 / 24,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
+                Heading(game.title),
+                const Heading(
                   'Conecte-se e comece a jogar!',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFFA1A1AA),
-                    height: 16 / 26,
-                  ),
+                  type: HeadingTypes.subtitle,
                 ),
                 const SizedBox(height: 16),
                 SizedBox(
@@ -78,7 +68,20 @@ class GamePage extends StatelessWidget {
                   child: ListView.separated(
                     itemCount: 10,
                     separatorBuilder: (_, __) => const SizedBox(width: 12),
-                    itemBuilder: (context, index) => const AdCard(),
+                    itemBuilder: (context, index) => AdCard(
+                      ad: AdModel(
+                        id: '1',
+                        gameId: '1',
+                        name: 'Lucas',
+                        yearsPlayed: 2,
+                        discord: 'HenriqueNas#3412',
+                        weekDays: [6, 7, 1],
+                        hourStart: 22,
+                        hourEnd: 24,
+                        useVoiceChannel: true,
+                        createdAt: DateTime.now(),
+                      ),
+                    ),
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
                     clipBehavior: Clip.none,

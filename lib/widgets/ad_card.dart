@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:nlw/models/ad_model.dart';
+
+import 'connect_dialog.dart';
 
 class AdCard extends StatelessWidget {
-  const AdCard({super.key});
+  const AdCard({
+    super.key,
+    required this.ad,
+  });
+
+  final AdModel ad;
 
   final labelStyle = const TextStyle(color: Color(0xFFC4C4C6), fontSize: 14);
   final valueStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
@@ -28,21 +36,26 @@ class AdCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Nome', style: labelStyle),
-            Text('Henrique Nascimento', style: valueStyle),
+            Text(ad.name, style: valueStyle),
             const SizedBox(height: 4),
             Text('Tempo de jogo', style: labelStyle),
-            Text('2 anos', style: valueStyle),
+            Text('${ad.yearsPlayed} anos', style: valueStyle),
             const SizedBox(height: 4),
             Text('Disponibilidade', style: labelStyle),
-            Text('3 dias', style: valueStyle),
+            Text('${ad.weekDays.length} dias', style: valueStyle),
             const SizedBox(height: 4),
             Text('Chamada de áudio?', style: labelStyle),
-            Text('Sim', style: useVoiceStyle),
+            Text(ad.useVoiceChannel ? 'Sim' : 'Não', style: useVoiceStyle),
             const SizedBox(height: 4),
             SizedBox(
               height: 40,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const ConnectDialog(),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF8B5CF6),
                 ),

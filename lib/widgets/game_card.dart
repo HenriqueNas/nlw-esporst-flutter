@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../models/game_model.dart';
+
 class GameCard extends StatelessWidget {
   const GameCard({
     super.key,
-    required this.image,
-    required this.title,
-    required this.ads,
+    required this.game,
   });
 
-  final String image;
-  final String title;
-  final int ads;
+  final GameModel game;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed('/game'),
+      onTap: () => Navigator.of(context).pushNamed(
+        '/game',
+        arguments: game,
+      ),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -29,7 +30,7 @@ class GameCard extends StatelessWidget {
               height: 320,
               width: 240,
               child: Image.network(
-                image,
+                game.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -54,7 +55,7 @@ class GameCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    game.title,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
@@ -63,7 +64,7 @@ class GameCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '$ads anúncios',
+                    '${game.ads} anúncios',
                     style: const TextStyle(
                       fontSize: 14,
                       color: Color(0xFFA1A1AA),

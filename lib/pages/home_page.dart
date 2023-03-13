@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:nlw/models/game_model.dart';
 
 import '../widgets/game_card.dart';
+import '../widgets/heading.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  final image =
-      'https://cdn1.epicgames.com/offer/24b9b5e323bc40eea252a10cdd3b2f10/LoL_1200x1600-15ad6c981af8d98f50e833eac7843986';
+  final game = const GameModel(
+    id: '1',
+    ads: 4,
+    title: 'Valorant',
+    image:
+        'https://m.media-amazon.com/images/M/MV5BODhkN2U1YzYtODQzZC00MTc5LTlmMmYtYjQ2ZGU2ZmM4YzJkXkEyXkFqcGdeQXVyMTE0MTc4MjU2._V1_FMjpg_UX1000_.jpg',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +32,10 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset('assets/logo.png'),
-              const Text(
-                'Encontre seu duo!',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  height: 38 / 24,
-                ),
-              ),
-              const Text(
+              const Heading('Encontre seu duo!'),
+              const Heading(
                 'Selecione o game que deseja jogar...',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFFA1A1AA),
-                  height: 26 / 16,
-                ),
+                type: HeadingTypes.subtitle,
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -48,11 +43,7 @@ class HomePage extends StatelessWidget {
                 child: ListView.separated(
                   itemCount: 5,
                   separatorBuilder: (_, __) => const SizedBox(width: 16),
-                  itemBuilder: (_, __) => GameCard(
-                    image: image,
-                    ads: 4,
-                    title: 'League of Legends',
-                  ),
+                  itemBuilder: (_, __) => GameCard(game: game),
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   clipBehavior: Clip.none,
